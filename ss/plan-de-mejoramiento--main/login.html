@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inicio de sesión de SportZone">
+
+    <title>SportZone | Iniciar sesión</title>
+    <style>
+
+        /* =========================
+           VARIABLES Y ESCALA TIPOGRÁFICA
+           ========================= */
+
+        :root {
+            --surface-dark: #111827;
+
+            --color-primary-100: #dbeafe;
+            --color-primary-200: #bfdbfe;
+            --color-primary-600: #2563eb;
+            --color-primary-700: #1d4ed8;
+
+            --color-secondary: #ffffff;
+
+            --color-text-primary: #111827;
+            --color-text-secondary: #64748b;
+            --color-text-inverse: #ffffff;
+
+            --color-border: #cbd5e1;
+
+            --font-family-base:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            /* Escala tipográfica de cinco tamaños en rem */
+            --font-size-xs: 0.75rem;    /* Tamaño 1: 12px (Auxiliar / Extra pequeño) */
+            --font-size-sm: 0.875rem;   /* Tamaño 2: 14px (Pequeño / Opciones) */
+            --font-size-base: 1rem;     /* Tamaño 3: 16px (Base / Inputs / Botón) */
+            --font-size-lg: 1.25rem;    /* Tamaño 4: 20px (Subtítulos destacados) */
+            --font-size-xl: 1.75rem;    /* Tamaño 5: 28px (Título principal) */
+
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-7: 32px;
+
+            --radius-md: 10px;
+            --radius-lg: 18px;
+
+            --border-width: 1px;
+            --border-style: solid;
+
+            --shadow-lg:
+                0 20px 50px rgba(0, 0, 0, 0.30);
+        }
+
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font-family-base);
+            font-size: var(--font-size-base);
+            background: var(--surface-dark);
+            color: var(--color-text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================
+           CONTENEDOR
+           ========================= */
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: var(--space-4);
+        }
+
+
+        /* =========================
+           TARJETA
+           ========================= */
+
+        .login-card {
+            background: var(--color-secondary);
+            padding: var(--space-7);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+
+        /* =========================
+           LOGO
+           ========================= */
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: var(--space-5);
+        }
+
+        .logo {
+            width: 180px;
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* =========================
+           ENCABEZADO
+           ========================= */
+
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .login-header h1 {
+            margin: 0 0 var(--space-2);
+            font-size: var(--font-size-xl); /* Aplicación Tamaño 5 */
+            color: var(--color-text-primary);
+        }
+
+        .login-header p {
+            margin: 0;
+            font-size: var(--font-size-base); /* Aplicación Tamaño 3 */
+            color: var(--color-text-secondary);
+        }
+
+
+        /* =========================
+           FORMULARIO
+           ========================= */
+
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-2);
+            font-weight: bold;
+            font-size: var(--font-size-sm); /* Aplicación Tamaño 2 */
+            color: var(--color-text-primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: var(--space-3);
+            border:
+                var(--border-width)
+                var(--border-style)
+                var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base); /* Aplicación Tamaño 3 */
+            background: var(--color-secondary);
+            color: var(--color-text-primary);
+            outline: none;
+        }
+
+
+        /* =========================
+           ENFOQUE
+           ========================= */
+
+        .form-group input:focus {
+            outline: 3px solid var(--color-primary-100);
+            border-color: var(--color-primary-600);
+        }
+
+
+        /* =========================
+           OPCIONES
+           ========================= */
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+            font-size: var(--font-size-sm); /* Aplicación Tamaño 2 */
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .remember input {
+            accent-color: var(--color-primary-600);
+        }
+
+        .forgot-password {
+            color: var(--color-primary-700);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: var(--font-size-sm); /* Aplicación Tamaño 2 */
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           BOTÓN
+           ========================= */
+
+        .login-button {
+            width: 100%;
+            padding: var(--space-3);
+            border: none;
+            border-radius: var(--radius-md);
+            background: var(--color-primary-600);
+            color: var(--color-text-inverse);
+            font-size: var(--font-size-base); /* Aplicación Tamaño 3 */
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            background: var(--color-primary-700);
+            transform: translateY(-1px);
+        }
+
+        .login-button:focus {
+            outline: 3px solid var(--color-primary-200);
+            outline-offset: 2px;
+        }
+
+
+        /* =========================
+           REGISTRO
+           ========================= */
+
+        .register-section {
+            text-align: center;
+            margin-top: var(--space-5);
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm); /* Aplicación Tamaño 2 */
+        }
+
+        .register-section a {
+            color: var(--color-primary-700);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .register-section a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: var(--space-3);
+            }
+
+            .login-card {
+                padding: var(--space-5);
+            }
+
+            .login-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="login-container">
+        <section class="login-card">
+
+            <!-- LOGO -->
+            <div class="logo-container">
+                <img
+                    src="assets/img/logo.svg"
+                    alt="Logo de SportZone"
+                    class="logo"
+                >
+            </div>
+
+            <!-- ENCABEZADO -->
+            <header class="login-header">
+                <h1>
+                    Bienvenido a SportZone
+                </h1>
+                <p>
+                    Inicia sesión para continuar
+                </p>
+            </header>
+
+            <!-- FORMULARIO -->
+            <form action="dashboard.html" method="get">
+
+                <div class="form-group">
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ejemplo@correo.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <div class="login-options">
+                    <label class="remember">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+                        <span>
+                            Recordarme
+                        </span>
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+            <!-- REGISTRO -->
+            <div class="register-section">
+                <p>
+                    ¿No tienes una cuenta?
+                    <a href="#">
+                        Crear cuenta
+                    </a>
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+:root {
+
+    /* =========================
+       COLORES PRINCIPALES
+       ========================= */
+
+    --color-primary-50: #E6F3FF;
+    --color-primary-100: #CCE7FF;
+    --color-primary-200: #99CFFF;
+    --color-primary-300: #66B7FF;
+    --color-primary-400: #339FFF;
+
+    /* Ajustado para contraste con texto blanco */
+    --color-primary-500: #0074D4;
+    --color-primary-600: #005BA8;
+    --color-primary-700: #00437D;
+    --color-primary-800: #00345F;
+    --color-primary-900: #002A52;
+
+
+    /* =========================
+       COLORES DE APOYO
+       ========================= */
+
+    --color-secondary: #FFFFFF;
+
+    --color-surface: #F5F7FA;
+    --color-surface-dark: #111111;
+
+    --color-border: #D9DEE5;
+
+
+    /* =========================
+       COLOR DE ACENTO
+       ========================= */
+
+    /* Azul oscuro para permitir texto blanco */
+    --color-accent: #0074D4;
+
+
+    /* =========================
+       COLORES DE TEXTO
+       ========================= */
+
+    --color-text-primary: #111111;
+    --color-text-secondary: #5F6368;
+    --color-text-inverse: #FFFFFF;
+    --color-text-muted: #5F6368;
+
+
+    /* =========================
+       COLORES DE ESTADO
+       ========================= */
+
+    --color-success: #166534;
+    --color-warning: #92400E;
+    --color-danger: #B91C1C;
+    --color-info: #005BA8;
+
+
+    /* =========================
+       DEGRADADOS
+       ========================= */
+
+    --gradient-brand: linear-gradient(
+        135deg,
+        #0074D4 0%,
+        #005BA8 100%
+    );
+
+    --gradient-dark: linear-gradient(
+        135deg,
+        #111111 0%,
+        #000000 100%
+    );
+
+
+    /* =========================
+       TIPOGRAFÍA
+       ========================= */
+
+    --font-family-base: Arial, Helvetica, sans-serif;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+
+
+    /* =========================
+       ESPACIADO
+       ========================= */
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+
+
+    /* =========================
+       BORDES
+       ========================= */
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    --border-width: 1px;
+    --border-style: solid;
+
+
+    /* =========================
+       SOMBRAS
+       ========================= */
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.10);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.20);
+}

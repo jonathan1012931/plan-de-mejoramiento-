@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Zone - Guía de Estilos & Componentes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Transición suave para el sidebar y la clase .abierto */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+        #sidebar.abierto {
+            transform: translateX(0);
+        }
+        /* Backdrop transition */
+        #sidebar-backdrop {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #sidebar-backdrop.abierto {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Backdrop para el menú móvil -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-40 md:hidden" onclick="toggleMenu()"></div>
+
+    <!-- SIDEBAR (Menú lateral con la clase .abierto) -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-gray-900 border-r border-gray-800 z-50 flex flex-col shadow-2xl">
+        <div class="p-6 border-b border-gray-800 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-xl tracking-wider">SZ</div>
+                <span class="text-xl font-extrabold tracking-wide text-white">Sport Zone</span>
+            </div>
+            <button onclick="toggleMenu()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Cerrar menú">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="#inicio" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-indigo-600/10 text-indigo-400 font-medium transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span>Inicio / Resumen</span>
+            </a>
+            <a href="#botones" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                <span>Botones (5 Estados)</span>
+            </a>
+            <a href="#inputs" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                <span>Inputs & Formularios</span>
+            </a>
+            <a href="#tarjetas" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <span>Tarjetas Interactivas</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center">
+            Sport Zone v1.0 • Mobile First
+        </div>
+    </aside>
+
+    <!-- NAVBAR SUPERIOR -->
+    <header class="sticky top-0 z-30 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleMenu()" class="p-2 rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Abrir menú">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <span class="font-bold text-lg text-white">Sport Zone <span class="text-indigo-400 font-normal text-sm hidden sm:inline">| Sistema de Componentes</span></span>
+            </div>
+
+            <!-- Simulador de Breakpoints (Mobile First responsive check) -->
+            <div class="hidden md:flex items-center space-x-2 text-xs bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
+                <span class="text-gray-400">Vista actual:</span>
+                <span id="breakpoint-indicator" class="text-indigo-400 font-semibold">Mobile First (&lt;640px)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- INICIO / HERO SECTION -->
+        <section id="inicio" class="bg-gradient-to-br from-indigo-950 via-gray-900 to-gray-950 border border-gray-800 rounded-2xl p-6 sm:p-10 shadow-xl">
+            <div class="max-w-3xl space-y-4">
+                <span class="inline-block bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-500/20">Mobile First Architecture</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Guía de Estilos & Componentes UI</h1>
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Bienvenido al sistema de diseño interactivo de <strong>Sport Zone</strong>. Diseñado desde cero bajo la filosofía Mobile First, este documento interactivo expone los componentes principales en sus <strong>5 estados clave</strong> (Default, Hover, Active, Focus, Disabled).
+                </p>
+                <div class="pt-4 flex flex-wrap gap-3">
+                    <a href="#botones" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2.5 rounded-xl text-sm transition-colors shadow-lg shadow-indigo-600/25">Ver Botones</a>
+                    <a href="#inputs" class="bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium px-5 py-2.5 rounded-xl text-sm border border-gray-700 transition-colors">Ver Inputs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: BOTONES (5 Estados) -->
+        <section id="botones" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full"></span>
+                    <span>1. Botones (Cinco Estados)</span>
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Evaluación completa de comportamiento interactivo en controles de acción.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- 1. Default -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block mb-1">1. Default</span>
+                        <p class="text-xs text-gray-400">Estado inicial inactivo del componente.</p>
+                    </div>
+                    <button class="w-full bg-indigo-600 text-white font-medium py-2.5 px-4 rounded-lg text-sm shadow-md transition-all">
+                        Botón Base
+                    </button>
+                </div>
+
+                <!-- 2. Hover -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block mb-1">2. Hover</span>
+                        <p class="text-xs text-gray-400">Efecto al pasar el cursor por encima.</p>
+                    </div>
+                    <button class="w-full bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm shadow-md transition-all">
+                        Botón Hover
+                    </button>
+                </div>
+
+                <!-- 3. Active -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block mb-1">3. Active</span>
+                        <p class="text-xs text-gray-400">Respuesta visual al hacer clic (presionado).</p>
+                    </div>
+                    <button class="w-full bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm shadow-md scale-95 transition-all">
+                        Botón Active
+                    </button>
+                </div>
+
+                <!-- 4. Focus -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block mb-1">4. Focus</span>
+                        <p class="text-xs text-gray-400">Enfoque de accesibilidad por teclado.</p>
+                    </div>
+                    <button class="w-full bg-indigo-600 text-white font-medium py-2.5 px-4 rounded-lg text-sm shadow-md ring-4 ring-indigo-400/50 outline-none">
+                        Botón Focus
+                    </button>
+                </div>
+
+                <!-- 5. Disabled -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block mb-1">5. Disabled</span>
+                        <p class="text-xs text-gray-400">Bloqueado para interacción del usuario.</p>
+                    </div>
+                    <button disabled class="w-full bg-gray-800 text-gray-500 font-medium py-2.5 px-4 rounded-lg text-sm cursor-not-allowed opacity-60">
+                        Desactivado
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: INPUTS Y FORMULARIOS (5 Estados) -->
+        <section id="inputs" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full"></span>
+                    <span>2. Campos de Texto / Inputs (Cinco Estados)</span>
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Estructura y variantes de campos de entrada para formularios.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- 1. Default -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 space-y-2">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block">1. Default</span>
+                    <label class="text-xs text-gray-400 block">Campo normal</label>
+                    <input type="text" placeholder="Escribir aquí..." class="w-full bg-gray-950 border border-gray-800 rounded-lg px-3 py-2 text-sm text-gray-200 placeholder-gray-600">
+                </div>
+
+                <!-- 2. Hover -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 space-y-2">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block">2. Hover</span>
+                    <label class="text-xs text-gray-400 block">Hover sobre borde</label>
+                    <input type="text" value="Cursor encima..." class="w-full bg-gray-950 border border-gray-600 rounded-lg px-3 py-2 text-sm text-gray-200">
+                </div>
+
+                <!-- 3. Active / Filled -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 space-y-2">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block">3. Active / Relleno</span>
+                    <label class="text-xs text-gray-400 block">Con contenido activo</label>
+                    <input type="text" value="Jonathan Quijano" class="w-full bg-gray-950 border border-indigo-500 rounded-lg px-3 py-2 text-sm text-white">
+                </div>
+
+                <!-- 4. Focus -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 space-y-2">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block">4. Focus</span>
+                    <label class="text-xs text-gray-400 block">Enfoque activo</label>
+                    <input type="text" value="Enfoque actual" class="w-full bg-gray-950 border border-indigo-500 rounded-lg px-3 py-2 text-sm text-white ring-2 ring-indigo-500/50 outline-none">
+                </div>
+
+                <!-- 5. Disabled -->
+                <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-4 space-y-2">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400 block">5. Disabled</span>
+                    <label class="text-xs text-gray-400 block">Deshabilitado</label>
+                    <input type="text" disabled value="No editable" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-sm text-gray-600 cursor-not-allowed opacity-60">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TARJETAS INTERACTIVAS (5 Estados / Variantes) -->
+        <section id="tarjetas" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full"></span>
+                    <span>3. Tarjetas / Cards (Variantes y Estados)</span>
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Contenedores de información modularizados para la plataforma.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Default -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md">Default Card</span>
+                        <span class="text-xs text-gray-500">Estado Base</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Plan de Entrenamiento Pro</h3>
+                    <p class="text-sm text-gray-400">Tarjeta estándar para visualización de rutinas y planes personalizados de deporte.</p>
+                    <button onclick="mostrarModal('Tarjeta Base', 'Has seleccionado la tarjeta estándar de entrenamiento.')" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 py-2 rounded-xl text-sm font-medium transition-colors">Ver Detalles</button>
+                </div>
+
+                <!-- Card 2: Hover State -->
+                <div class="bg-gray-900 border border-gray-800 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 transition-all rounded-2xl p-5 space-y-3 cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Hover Effect</span>
+                        <span class="text-xs text-emerald-500">Interactiva</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Nutrición & Dieta Fitness</h3>
+                    <p class="text-sm text-gray-400">Pasa el cursor por encima de esta tarjeta para experimentar la transición de borde y sombra.</p>
+                    <button onclick="mostrarModal('Tarjeta Interactiva', 'Excelente, la tarjeta reacciona al hover y permite interacción sin usar alert() nativo.')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-xl text-sm font-medium transition-colors">Seleccionar Plan</button>
+                </div>
+
+                <!-- Card 3: Disabled State -->
+                <div class="bg-gray-900/40 border border-gray-800/60 rounded-2xl p-5 space-y-3 opacity-60">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-gray-500 bg-gray-800 px-2.5 py-1 rounded-md">Disabled Card</span>
+                        <span class="text-xs text-gray-600">Bloqueado</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-400">Torneo VIP (Próximamente)</h3>
+                    <p class="text-sm text-gray-600">Este módulo se encuentra desactivado temporalmente para mantenimiento del sistema.</p>
+                    <button disabled class="w-full bg-gray-800 text-gray-600 py-2 rounded-xl text-sm font-medium cursor-not-allowed">No Disponible</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-gray-800 bg-gray-900/50 py-6 text-center text-xs text-gray-500">
+        <p>© 2026 Sport Zone. Todos los derechos reservados. Diseñado con Mobile First y Tailwind CSS.</p>
+    </footer>
+
+    <!-- MODAL PERSONALIZADO (Reemplazo total de alert()) -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between">
+                <h3 id="modal-title" class="text-lg font-bold text-white">Título del Modal</h3>
+                <button onclick="cerrarModal()" class="text-gray-400 hover:text-white p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <p id="modal-message" class="text-sm text-gray-300">Mensaje descriptivo del sistema...</p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="cerrarModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CONTROL PARA EL SIDEBAR Y MODAL -->
+    <script>
+        // Función principal para abrir y cerrar el menú lateral usando la clase .abierto
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            
+            sidebar.classList.toggle('abierto');
+            backdrop.classList.toggle('abierto');
+        }
+
+        // Funciones para manejar el modal personalizado sin usar alert()
+        function mostrarModal(titulo, mensaje) {
+            document.getElementById('modal-title').innerText = titulo;
+            document.getElementById('modal-message').innerText = mensaje;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function cerrarModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        // Actualizador dinámico del indicador de breakpoint para pruebas responsive
+        function actualizarBreakpoint() {
+            const width = window.innerWidth;
+            const indicator = document.getElementById('breakpoint-indicator');
+            if (width < 640) {
+                indicator.innerText = "Mobile First (<640px)";
+            } else if (width < 768) {
+                indicator.innerText = "Small / Tablet Sm (≥640px)";
+            } else if (width < 1024) {
+                indicator.innerText = "Tablet Md (≥768px)";
+            } else if (width < 1440) {
+                indicator.innerText = "Desktop Lg (≥1024px)";
+            } else {
+                indicator.innerText = "Desktop Xl (≥1440px)";
+            }
+        }
+
+        window.addEventListener('resize', actualizarBreakpoint);
+        window.addEventListener('load', actualizarBreakpoint);
+    </script>
+</body>
+</html>

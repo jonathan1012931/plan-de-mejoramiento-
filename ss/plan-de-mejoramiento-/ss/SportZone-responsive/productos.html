@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Zone - Panel de Datos y Gestión</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Transición suave para el sidebar y la clase .abierto */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+        #sidebar.abierto {
+            transform: translateX(0);
+        }
+        /* Backdrop transition */
+        #sidebar-backdrop {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #sidebar-backdrop.abierto {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Backdrop para el menú móvil -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-40 md:hidden" onclick="toggleMenu()"></div>
+
+    <!-- SIDEBAR (Menú lateral con la clase .abierto) -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-gray-900 border-r border-gray-800 z-50 flex flex-col shadow-2xl">
+        <div class="p-6 border-b border-gray-800 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-xl tracking-wider">SZ</div>
+                <span class="text-xl font-extrabold tracking-wide text-white">Sport Zone</span>
+            </div>
+            <button onclick="toggleMenu()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Cerrar menú">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="#analisis" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-indigo-600/10 text-indigo-400 font-medium transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                <span>Análisis de Datos</span>
+            </a>
+            <a href="#productos" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                <span>Catálogo de Productos</span>
+            </a>
+            <a href="#pedidos" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                <span>Gestión de Pedidos</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center">
+            Sport Zone v2.0 • COP Intl.NumberFormat
+        </div>
+    </aside>
+
+    <!-- NAVBAR SUPERIOR -->
+    <header class="sticky top-0 z-30 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleMenu()" class="p-2 rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Abrir menú">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <span class="font-bold text-lg text-white">Sport Zone <span class="text-indigo-400 font-normal text-sm hidden sm:inline">| Panel Analítico</span></span>
+            </div>
+
+            <div class="flex items-center space-x-2 text-xs bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
+                <span class="text-gray-400">Moneda:</span>
+                <span class="text-emerald-400 font-semibold">Pesos Colombianos (COP)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECCIÓN 1: ANÁLISIS DE DATOS -->
+        <section id="analisis" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white flex items-center space-x-2">
+                    <span class="w-3 h-3 bg-indigo-500 rounded-full"></span>
+                    <span>Análisis Estadístico de Productos</span>
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">Resultados calculados mediante métodos funcionales de arreglos (sin bucles `for`) y formateados en COP.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-2 shadow-lg">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400">Producto Más Caro</span>
+                    <h3 id="res-mas-caro" class="text-lg font-bold text-white">-</h3>
+                    <p id="res-precio-caro" class="text-xl font-extrabold text-emerald-400">-</p>
+                </div>
+
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-2 shadow-lg">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400">Promedio de Precios</span>
+                    <h3 class="text-sm text-gray-400">Valor medio del catálogo</h3>
+                    <p id="res-promedio" class="text-xl font-extrabold text-emerald-400">-</p>
+                </div>
+
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-2 shadow-lg">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400">Stock Crítico (&lt; 5 und)</span>
+                    <h3 class="text-sm text-gray-400">Productos con alerta de stock</h3>
+                    <p id="res-stock-critico" class="text-2xl font-extrabold text-amber-400">-</p>
+                </div>
+
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-2 shadow-lg">
+                    <span class="text-xs uppercase tracking-wider font-bold text-indigo-400">Catálogo General</span>
+                    <h3 class="text-sm text-gray-400">Total productos registrados</h3>
+                    <p id="res-total-items" class="text-2xl font-extrabold text-white">-</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4">
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-lg text-white flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <span>Total de Unidades por Categoría</span>
+                    </h3>
+                    <div id="tabla-categorias" class="space-y-2 max-h-64 overflow-y-auto pr-2"></div>
+                </div>
+
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-lg text-white flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <span>Listado de Productos con Stock &lt; 5</span>
+                    </h3>
+                    <div id="tabla-stock-critico" class="space-y-2 max-h-64 overflow-y-auto pr-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PRODUCTOS -->
+        <section id="productos" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Catálogo de Productos (15 Ítems)</h2>
+                    <p class="text-gray-400 text-sm mt-1">Estructura simulada de base de datos relacional.</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-800/70 text-gray-300 text-xs uppercase tracking-wider border-b border-gray-700">
+                                <th class="p-4">ID</th>
+                                <th class="p-4">Nombre del Producto</th>
+                                <th class="p-4">Categoría</th>
+                                <th class="p-4">Precio (COP)</th>
+                                <th class="p-4">Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-productos" class="divide-y divide-gray-800 text-sm text-gray-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: PEDIDOS -->
+        <section id="pedidos" class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white">Gestión de Pedidos (8 Pedidos)</h2>
+                <p class="text-gray-400 text-sm mt-1">Historial reciente de transacciones y compras.</p>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-800/70 text-gray-300 text-xs uppercase tracking-wider border-b border-gray-700">
+                                <th class="p-4">ID Pedido</th>
+                                <th class="p-4">Cliente</th>
+                                <th class="p-4">ID Producto</th>
+                                <th class="p-4">Cantidad</th>
+                                <th class="p-4">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-pedidos" class="divide-y divide-gray-800 text-sm text-gray-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-gray-800 bg-gray-900/50 py-6 text-center text-xs text-gray-500">
+        <p>© 2026 Sport Zone. Todos los derechos reservados. Desarrollado con métodos avanzados de arreglos y formato COP.</p>
+    </footer>
+
+    <!-- SCRIPT DE LÓGICA Y DATOS DE PRUEBA -->
+    <script>
+        const productos = [
+            { id: 1, nombre: "Balón de Fútbol Pro", categoria: "Fútbol", precio: 120000, stock: 12 },
+            { id: 2, nombre: "Guantes de Arquero", categoria: "Fútbol", precio: 85000, stock: 4 },
+            { id: 3, nombre: "Zapatillas Running", categoria: "Running", precio: 250000, stock: 8 },
+            { id: 4, nombre: "Camiseta Deportiva Seco", categoria: "Textil", precio: 45000, stock: 25 },
+            { id: 5, nombre: "Mancuernas 5kg (Par)", categoria: "Gym", precio: 95000, stock: 15 },
+            { id: 6, nombre: "Mat de Yoga Antideslizante", categoria: "Yoga", precio: 60000, stock: 3 },
+            { id: 7, nombre: "Banda Elástica de Resistencia", categoria: "Gym", precio: 25000, stock: 30 },
+            { id: 8, nombre: "Raqueta de Tenis Junior", categoria: "Tenis", precio: 180000, stock: 5 },
+            { id: 9, nombre: "Casco de Ciclismo Ruta", categoria: "Ciclismo", precio: 210000, stock: 7 },
+            { id: 10, nombre: "Botilcar / Caramañola 750ml", categoria: "Accesorios", precio: 20000, stock: 2 },
+            { id: 11, nombre: "Cuerda para Saltar de Alta Velocidad", categoria: "Gym", precio: 35000, stock: 14 },
+            { id: 12, nombre: "Rodillera Ortopédica Deportiva", categoria: "Salud", precio: 50000, stock: 9 },
+            { id: 13, nombre: "Medias Antideslizantes Fútbol", categoria: "Fútbol", precio: 22000, stock: 40 },
+            { id: 14, nombre: "Proteína Whey 2lb", categoria: "Suplementos", precio: 160000, stock: 6 },
+            { id: 15, nombre: "Gafas de Natación Anti-empañantes", categoria: "Natación", precio: 70000, stock: 10 }
+        ];
+
+        const pedidos = [
+            { idPedido: 1, cliente: "Carlos Pérez", idProducto: 1, cantidad: 2, fecha: "2026-09-01" },
+            { idPedido: 2, cliente: "Ana Gómez", idProducto: 3, cantidad: 1, fecha: "2026-09-02" },
+            { idPedido: 3, cliente: "Luis Torres", idProducto: 4, cantidad: 3, fecha: "2026-09-03" },
+            { idPedido: 4, cliente: "María Rodríguez", idProducto: 6, cantidad: 1, fecha: "2026-09-03" },
+            { idPedido: 5, cliente: "Jorge Díaz", idProducto: 14, cantidad: 1, fecha: "2026-09-04" },
+            { idPedido: 6, cliente: "Sofia Castro", idProducto: 2, cantidad: 2, fecha: "2026-09-05" },
+            { idPedido: 7, cliente: "Andrés Ruiz", idProducto: 9, cantidad: 1, fecha: "2026-09-05" },
+            { idPedido: 8, cliente: "Laura Vargas", idProducto: 10, cantidad: 4, fecha: "2026-09-06" }
+        ];
+
+        const formateadorCOP = new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0
+        });
+
+        function inicializarAnalisis() {
+            const productoMasCaro = productos.reduce((prev, current) => 
+                (current.precio > prev.precio) ? current : prev
+            );
+            document.getElementById('res-mas-caro').innerText = productoMasCaro.nombre;
+            document.getElementById('res-precio-caro').innerText = formateadorCOP.format(productoMasCaro.precio);
+
+            const sumaPrecios = productos.reduce((total, p) => total + p.precio, 0);
+            const promedioPrecio = sumaPrecios / productos.length;
+            document.getElementById('res-promedio').innerText = formateadorCOP.format(promedioPrecio);
+
+            const stockCritico = productos.filter(p => p.stock < 5);
+            document.getElementById('res-stock-critico').innerText = stockCritico.length + " ítems";
+            document.getElementById('res-total-items').innerText = productos.length + " productos";
+
+            const contenedorStock = document.getElementById('tabla-stock-critico');
+            contenedorStock.innerHTML = stockCritico.map(p => `
+                <div class="flex items-center justify-between bg-gray-950 p-3 rounded-xl border border-gray-800 text-xs">
+                    <span class="font-semibold text-gray-200">${p.nombre}</span>
+                    <span class="bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md font-bold">Stock: ${p.stock}</span>
+                </div>
+            `).join('');
+
+            const unidadesPorCat = productos.reduce((acumulador, p) => {
+                acumulador[p.categoria] = (acumulador[p.categoria] || 0) + p.stock;
+                return acumulador;
+            }, {});
+
+            const contenedorCat = document.getElementById('tabla-categorias');
+            contenedorCat.innerHTML = Object.entries(unidadesPorCat).map(([cat, total]) => `
+                <div class="flex items-center justify-between bg-gray-950 p-3 rounded-xl border border-gray-800 text-xs">
+                    <span class="text-gray-300 font-medium">${cat}</span>
+                    <span class="bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-md font-bold">${total} unidades</span>
+                </div>
+            `).join('');
+
+            document.getElementById('tbody-productos').innerHTML = productos.map(p => `
+                <tr class="hover:bg-gray-800/40 transition-colors">
+                    <td class="p-4 font-mono text-gray-400">#${p.id}</td>
+                    <td class="p-4 font-semibold text-white">${p.nombre}</td>
+                    <td class="p-4"><span class="bg-gray-800 px-2.5 py-1 rounded-md text-xs text-indigo-300">${p.categoria}</span></td>
+                    <td class="p-4 font-bold text-emerald-400">${formateadorCOP.format(p.precio)}</td>
+                    <td class="p-4"><span class="${p.stock < 5 ? 'text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded' : 'text-gray-300'}">${p.stock} und</span></td>
+                </tr>
+            `).join('');
+
+            document.getElementById('tbody-pedidos').innerHTML = pedidos.map(ped => `
+                <tr class="hover:bg-gray-800/40 transition-colors">
+                    <td class="p-4 font-mono text-gray-400">#${ped.idPedido}</td>
+                    <td class="p-4 font-semibold text-white">${ped.cliente}</td>
+                    <td class="p-4 font-mono text-indigo-400">Prod #${ped.idProducto}</td>
+                    <td class="p-4 font-bold text-gray-200">${ped.cantidad}</td>
+                    <td class="p-4 text-xs text-gray-400">${ped.fecha}</td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            sidebar.classList.toggle('abierto');
+            backdrop.classList.toggle('abierto');
+        }
+
+        window.addEventListener('DOMContentLoaded', inicializarAnalisis);
+    </script>
+</body>
+</html>

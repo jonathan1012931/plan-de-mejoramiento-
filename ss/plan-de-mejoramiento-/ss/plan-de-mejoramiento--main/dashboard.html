@@ -1,0 +1,373 @@
+Aquí tienes el código actualizado de tu `dashboard.html` sin el cuarto punto (la sección de la bitácora), manteniendo la estructura de Grid, las tarjetas con `auto-fit`, la barra superior fija y la tabla larga para pruebas:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportZone | Dashboard</title>
+
+    <style>
+        /* =========================
+           VARIABLES Y TOKENS
+           ========================= */
+        :root {
+            --surface-dark: #111827;
+            --surface-sidebar: #1f2937;
+            --color-primary-600: #2563eb;
+            --color-primary-700: #1d4ed8;
+            --color-secondary: #ffffff;
+            --color-text-primary: #111827;
+            --color-text-secondary: #64748b;
+            --color-border: #cbd5e1;
+            
+            --font-family-base: Arial, Helvetica, sans-serif;
+            --font-size-sm: 14px;
+            --font-size-md: 16px;
+            --font-size-xl: 24px;
+            --font-size-lg: 18px;
+
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-7: 32px;
+
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* =========================
+           CONFIGURACIÓN GENERAL Y GRID (Punto 1)
+           ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font-family-base);
+            background: #f3f4f6;
+            color: var(--color-text-primary);
+            
+            /* Maquetación general con CSS Grid: Menú de 240px y columnas dinámicas */
+            display: grid;
+            grid-template-areas: 
+                "header header"
+                "sidebar main"
+                "sidebar footer";
+            grid-template-columns: 240px 1fr;
+            grid-template-rows: 70px 1fr auto;
+        }
+
+        /* =========================
+           BARRA SUPERIOR STICKY (Punto 3)
+           ========================= */
+        header {
+            grid-area: header;
+            background: var(--surface-dark);
+            color: var(--color-secondary);
+            padding: 0 var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            
+            /* Fijar la barra superior */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            margin-left: var(--space-6);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        header nav a:hover {
+            color: var(--color-primary-600);
+        }
+
+        /* =========================
+           MENÚ LATERAL IZQUIERDO 240px (Punto 1)
+           ========================= */
+        aside {
+            grid-area: sidebar;
+            background: var(--surface-sidebar);
+            color: var(--color-secondary);
+            padding: var(--space-6) var(--space-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            
+            /* Altura fija para que el menú acompañe el scroll si es necesario */
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+        }
+
+        aside h3 {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-2);
+        }
+
+        aside nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        aside a {
+            color: #9ca3af;
+            text-decoration: none;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            transition: all 0.2s ease;
+        }
+
+        aside a:hover, aside a.active {
+            background: var(--color-primary-600);
+            color: var(--color-secondary);
+        }
+
+        /* =========================
+           CONTENIDO PRINCIPAL (MAIN)
+           ========================= */
+        main {
+            grid-area: main;
+            padding: var(--space-7);
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-2);
+            color: var(--surface-dark);
+        }
+
+        .welcome-text {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-7);
+            font-size: var(--font-size-md);
+        }
+
+        /* =========================
+           TARJETAS DE INDICADORES CON AUTO-FIT (Punto 2)
+           ========================= */
+        .kpi-grid {
+            display: grid;
+            /* Auto-fit con minmax para asegurar que se reacomodan solas al angostar la ventana */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-7);
+        }
+
+        .kpi-card {
+            background: var(--color-secondary);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--color-primary-600);
+        }
+
+        .kpi-card h3 {
+            font-size: var(--font-size-lg);
+            margin: 0 0 var(--space-2) 0;
+            color: var(--surface-dark);
+        }
+
+        .kpi-card p {
+            margin: 0;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+        }
+
+        /* =========================
+           TABLA LARGA DE PRUEBA (Punto 3)
+           ========================= */
+        .table-section {
+            background: var(--color-secondary);
+            padding: var(--space-6);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-7);
+        }
+
+        .table-section h2 {
+            margin-top: 0;
+            font-size: var(--font-size-lg);
+            color: var(--surface-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-4);
+        }
+
+        th, td {
+            padding: var(--space-3);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+            font-size: var(--font-size-sm);
+        }
+
+        th {
+            background-color: var(--color-primary-600);
+            color: var(--color-secondary);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* =========================
+           PIE DE PÁGINA (FOOTER) (Punto 1)
+           ========================= */
+        footer {
+            grid-area: footer;
+            background: var(--color-secondary);
+            color: var(--color-text-secondary);
+            text-align: center;
+            padding: var(--space-4);
+            font-size: var(--font-size-sm);
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* =========================
+           RESPONSIVE MÓVIL
+           ========================= */
+        @media (max-width: 768px) {
+            body {
+                grid-template-areas: 
+                    "header"
+                    "sidebar"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+            }
+            
+            aside {
+                height: auto;
+                position: relative;
+                top: 0;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: var(--space-3);
+            }
+
+            aside nav {
+                flex-direction: row;
+            }
+
+            aside h3 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. BARRA SUPERIOR (Con Position Sticky - Punto 3) -->
+    <header>
+        <img src="assets/img/logo.svg" alt="Logo de SportZone" width="150">
+        <nav>
+            <a href="dashboard.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="login.html">Cerrar sesión</a>
+        </nav>
+    </header>
+
+    <!-- 1. MENÚ LATERAL IZQUIERDO DE 240px (Punto 1) -->
+    <aside>
+        <h3>Navegación</h3>
+        <nav>
+            <a href="dashboard.html" class="active">Panel Principal</a>
+            <a href="productos.html">Productos</a>
+            <a href="#">Deportes</a>
+            <a href="#">Usuarios</a>
+        </nav>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <h1>Dashboard</h1>
+        <p class="welcome-text">Bienvenido al panel principal de SportZone.</p>
+
+        <!-- 2. FILA DE CUATRO TARJETAS DE INDICADORES CON AUTO-FIT (Punto 2) -->
+        <section>
+            <h2>Resumen de Indicadores</h2>
+            <div class="kpi-grid">
+                <article class="kpi-card">
+                    <h3>Productos</h3>
+                    <p>24 registrados</p>
+                </article>
+                <article class="kpi-card">
+                    <h3>Deportes</h3>
+                    <p>8 disponibles</p>
+                </article>
+                <article class="kpi-card">
+                    <h3>Usuarios</h3>
+                    <p>35 activos</p>
+                </article>
+                <article class="kpi-card">
+                    <h3>Ventas</h3>
+                    <p>$4.500.000</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. TABLA LARGA PARA PROBAR EL DESPLAZAMIENTO Y STICKY (Punto 3) -->
+        <section class="table-section">
+            <h2>Listado General de Transacciones (Prueba de Scroll)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Carlos Pérez</td><td>Balón de fútbol</td><td>2026-09-01</td><td>$89.900</td></tr>
+                    <tr><td>2</td><td>Ana Gómez</td><td>Baloncesto</td><td>2026-09-02</td><td>$74.900</td></tr>
+                    <tr><td>3</td><td>Luis Torres</td><td>Tenis deportivos</td><td>2026-09-03</td><td>$159.900</td></tr>
+                    <tr><td>4</td><td>María Ruiz</td><td>Gafas de natación</td><td>2026-09-04</td><td>$49.900</td></tr>
+                    <tr><td>5</td><td>Jorge Castro</td><td>Camiseta deportiva</td><td>2026-09-05</td><td>$45.000</td></tr>
+                    <tr><td>6</td><td>Diana Rojas</td><td>Mochila GYM</td><td>2026-09-06</td><td>$95.000</td></tr>
+                    <tr><td>7</td><td>Pedro Infante</td><td>Rodilleras</td><td>2026-09-07</td><td>$30.000</td></tr>
+                    <tr><td>8</td><td>Sofia Vergara</td><td>Copa de natación</td><td>2026-09-08</td><td>$25.000</td></tr>
+                    <tr><td>9</td><td>Andrés Parra</td><td>Raqueta de tenis</td><td>2026-09-09</td><td>$220.000</td></tr>
+                    <tr><td>10</td><td>Lucia Mendez</td><td>Protector bucal</td><td>2026-09-10</td><td>$15.000</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 1. PIE DE PÁGINA (Punto 1) -->
+    <footer>
+        <p>© 2026 SportZone. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
+
+```

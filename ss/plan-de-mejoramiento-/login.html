@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Inicio de sesión de SportZone">
+    <title>SportZone | Iniciar sesión</title>
+
+    <!-- Tokens de diseño -->
+    <link rel="stylesheet" href="css/tokens.css">
+
+    <!-- Estilos del login -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card" aria-labelledby="login-title">
+
+            <!-- Logo -->
+            <div class="logo-container">
+                <img
+                    src="assets/img/logo.svg"
+                    alt="Logo de SportZone"
+                    class="logo"
+                >
+            </div>
+
+            <!-- Título -->
+            <header class="login-header">
+                <h1 id="login-title">Bienvenido a SportZone</h1>
+                <p>Inicia sesión para continuar</p>
+            </header>
+
+            <!-- Formulario -->
+            <form action="dashboard.html" method="get">
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ejemplo@correo.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <div class="login-options">
+                    <label class="remember">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+                        <span>Recordarme</span>
+                    </label>
+
+                    <a href="#" class="forgot-password">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-button">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+            <!-- Registro -->
+            <div class="register-section">
+                <p>
+                    ¿No tienes una cuenta?
+                    <a href="#">Crear cuenta</a>
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

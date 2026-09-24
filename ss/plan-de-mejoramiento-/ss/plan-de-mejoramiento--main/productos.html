@@ -1,0 +1,249 @@
+Se ha actualizado tu código de `productos.html` incorporando los estilos solicitados para la tabla: **encabezado con color de marca**, **filas alternas (efecto cebra)** y el **estado de `:hover**` al pasar el cursor por encima.
+
+Aquí tienes el código completo integrado:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportZone | Productos</title>
+
+    <style>
+        /* =========================
+           VARIABLES Y TOKENS
+           ========================= */
+        :root {
+            --surface-dark: #111827;
+            --color-primary-600: #2563eb;
+            --color-primary-700: #1d4ed8;
+            --color-secondary: #ffffff;
+            --color-text-primary: #111827;
+            --color-text-secondary: #64748b;
+            --color-border: #cbd5e1;
+            
+            --font-family-base: Arial, Helvetica, sans-serif;
+            --font-size-sm: 14px;
+            --font-size-md: 16px;
+            --font-size-xl: 24px;
+
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+
+            --radius-md: 10px;
+        }
+
+        /* =========================
+           ESTILOS GENERALES
+           ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font-family-base);
+            background: #f3f4f6;
+            color: var(--color-text-primary);
+        }
+
+        header {
+            background: var(--surface-dark);
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            margin-left: var(--space-6);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 900px;
+            margin: var(--space-6) auto;
+            padding: var(--space-4);
+            background: var(--color-secondary);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-2);
+            color: var(--surface-dark);
+        }
+
+        p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+        }
+
+        button {
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-primary-600);
+            color: var(--color-secondary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--color-primary-700);
+        }
+
+        /* =========================
+           ESTILOS DE LA TABLA
+           ========================= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-4);
+            background: var(--color-secondary);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        caption {
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: var(--space-2);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-md);
+        }
+
+        /* 1. Encabezado con color de marca */
+        thead {
+            background-color: var(--color-primary-600);
+            color: var(--color-secondary);
+        }
+
+        th, td {
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+            font-size: var(--font-size-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* 2. Filas alternas (Efecto cebra) */
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* 3. Estado de :hover en las filas */
+        tbody tr:hover {
+            background-color: #e2e8f0;
+            transition: background-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="assets/img/logo.svg" alt="Logo SportZone" width="180">
+
+        <nav>
+            <a href="dashboard.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="login.html">Cerrar sesión</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <h1>Productos</h1>
+
+        <p>Lista de productos deportivos registrados.</p>
+
+        <button type="button">
+            Agregar producto
+        </button>
+
+        <br><br>
+
+        <table>
+
+            <caption>Productos deportivos</caption>
+
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Balón de fútbol</td>
+                    <td>Fútbol</td>
+                    <td>$89.900</td>
+                    <td>25</td>
+                    <td>Activo</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Balón de baloncesto</td>
+                    <td>Baloncesto</td>
+                    <td>$74.900</td>
+                    <td>12</td>
+                    <td>Activo</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Tenis deportivos</td>
+                    <td>Atletismo</td>
+                    <td>$159.900</td>
+                    <td>18</td>
+                    <td>Activo</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Gafas de natación</td>
+                    <td>Natación</td>
+                    <td>$49.900</td>
+                    <td>7</td>
+                    <td>Activo</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </main>
+
+</body>
+</html>
+
+```

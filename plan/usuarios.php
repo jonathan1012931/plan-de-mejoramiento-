@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/config/guardia.php';
+requerirRol(['administrador']);
+$usuario = usuarioActual();
 require __DIR__ . '/config/conexion.php';
 
 $pdo = Conexion::obtener();
@@ -17,7 +20,12 @@ $usuarios = $pdo->query(
 </head>
 <body>
 <header class="site-header">
-  <a href="dashboard.html" aria-label="Ir al inicio"><img class="site-logo" src="assets/img/logo.png" alt="Logo Sport Zone"></a>
+  <a href="dashboard.php" aria-label="Ir al inicio"><img class="site-logo" src="assets/img/logo.png" alt="Logo Sport Zone"></a>
+  <div class="user-info">
+    <span><?= htmlspecialchars($usuario['nombre'], ENT_QUOTES, 'UTF-8') ?></span>
+    <span class="user-role"><?= htmlspecialchars($usuario['rol'], ENT_QUOTES, 'UTF-8') ?></span>
+    <a class="logout-link" href="salir.php">Salir</a>
+  </div>
 </header>
 <main class="main-content">
   <h1 class="page-title">Usuarios registrados</h1>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require __DIR__ . '/config/sesion.php';
 require __DIR__ . '/config/conexion.php';
 
 if (empty($_SESSION['csrf_token'])) {
@@ -63,8 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_rol'] = $usuario['rol'];
+                $_SESSION['ultima_actividad'] = time();
 
-                header('Location: dashboard.html');
+                header('Location: dashboard.php');
                 exit;
 
             } else {

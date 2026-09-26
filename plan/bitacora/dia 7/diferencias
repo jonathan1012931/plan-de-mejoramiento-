@@ -1,0 +1,19 @@
+diferencias en forEach and map
+
+
+.forEach(): Está diseñado estrictamente para ejecutar efectos secundarios 
+(side effects) por cada elemento del arreglo. 
+No devuelve un nuevo arreglo; su valor de retorno es siempre undefined. 
+Es ideal cuando solo quieres recorrer los elementos para imprimirlos en consola, 
+hacer inserciones en el DOM o modificar variables externas.
+
+.map(): Está diseñado para transformar datos. 
+Recorre cada elemento, aplica una función de 
+transformación y retorna obligatoriamente un nuevo arreglo
+con la misma longitud que el original, conteniendo los resultados transformados, 
+dejando el arreglo original intacto (programación pura / inmutabilidad).
+
+Ejemplo Propio:
+
+Imaginemos que tenemos los precios base de algunos productos en pesos colombianos
+y necesitamos calcular un incremento del 10% para la nueva temporada.

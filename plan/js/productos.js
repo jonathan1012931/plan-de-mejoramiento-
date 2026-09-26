@@ -94,23 +94,6 @@ function pintarPedidos() {
 }
 
 /* ---------- 3. Menú lateral: responde a click y a tecla Enter ---------- */
-function toggleMenu() {
-    document.getElementById('sidebar').classList.toggle('abierto');
-}
-window.toggleMenu = toggleMenu;
-
-function inicializarMenu() {
-    const boton = document.getElementById('btn-menu');
-    if (!boton) return;
-
-    boton.addEventListener('click', toggleMenu);
-    boton.addEventListener('keydown', (evento) => {
-        if (evento.key === 'Enter' || evento.key === ' ') {
-            evento.preventDefault();
-            toggleMenu();
-        }
-    });
-}
 
 /* ---------- 4. Validación del formulario de producto ---------- */
 function mostrarError(campo, mensaje) {

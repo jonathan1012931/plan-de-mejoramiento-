@@ -1,0 +1,1 @@
+<footer class="site-footer">© 2026 Sport Zone. Todos los derechos reservados.</footer>

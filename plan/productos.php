@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/config/guardia.php';
 $usuario = usuarioActual();
+$paginaActual = 'productos';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,26 +15,8 @@ $usuario = usuarioActual();
 </head>
 <body>
 
-<header class="site-header">
-  <a href="dashboard.php" aria-label="Ir al inicio"><img class="site-logo" src="assets/img/logo.png" alt="Logo Sport Zone"></a>
-  <div class="user-info">
-    <span><?= htmlspecialchars($usuario['nombre'], ENT_QUOTES, 'UTF-8') ?></span>
-    <span class="user-role"><?= htmlspecialchars($usuario['rol'], ENT_QUOTES, 'UTF-8') ?></span>
-    <a class="logout-link" href="salir.php">Salir</a>
-  </div>
-  <button id="btn-menu" class="menu-button" type="button" aria-label="Abrir menú">☰</button>
-</header>
-
-<aside id="sidebar" class="sidebar">
-  <h2 class="sidebar-title">Navegación</h2>
-  <nav aria-label="Navegación principal">
-    <a href="dashboard.php">🏠 Dashboard</a>
-    <a class="active" href="#productos">📦 Catálogo de Productos</a>
-    <a href="usuarios.php">👤 Usuarios</a>
-    <a href="salir.php">🚪 Cerrar sesión</a>
-  </nav>
-  <p class="sidebar-note">Sport Zone v2.0 · Precios formateados en COP.</p>
-</aside>
+<?php require __DIR__ . '/parciales/cabecera.php'; ?>
+<?php require __DIR__ . '/parciales/menu.php'; ?>
 
 <main class="main-content">
 
@@ -116,8 +99,9 @@ $usuario = usuarioActual();
 
 </main>
 
-<footer class="site-footer">© 2026 Sport Zone. Todos los derechos reservados.</footer>
+<?php require __DIR__ . '/parciales/pie.php'; ?>
 
+<script src="js/menu.js"></script>
 <script type="module" src="js/productos.js"></script>
 </body>
 </html>
